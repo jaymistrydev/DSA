@@ -95,6 +95,20 @@ class DoublyLinkedList:
             if new_node.next is None:
                 self.tail=new_node
 
+    def insert_before_tail(self, data):
+        if self.tail is None:
+            return
+        new_node=Node(data)
+        previous=self.tail.prev
+        new_node.next=self.tail
+        new_node.prev=previous
+        if previous:
+            previous.next=new_node
+        self.tail.prev=new_node
+        if self.tail == self.head:
+            self.head = new_node
+
+
 if __name__ == "__main__":
     dll=DoublyLinkedList()
     for _ in range(random.randint(1,10)):
@@ -111,4 +125,7 @@ if __name__ == "__main__":
     dll.display()
 
     dll.delete_kth_node(3)
+    dll.display()
+
+    dll.insert_before_tail(75)
     dll.display()
